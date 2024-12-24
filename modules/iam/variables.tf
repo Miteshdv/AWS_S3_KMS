@@ -23,4 +23,13 @@ variable "origin_access_identity_id" {
   type        = string
 }
 
+variable "cloudfront_domain_name" {
+  description = "Domain name of the CloudFront distribution"
+  type        = string
+}
+
+variable "website_bucket_domain_name" {
+  description = "Domain name of the S3 website bucket"
+  type        = string
+}
 

@@ -6,7 +6,7 @@ resource "aws_s3_bucket_policy" "images_bucket_policy" {
     Statement = [
       {
         Effect    = "Allow",
-        Principal = "*"
+        Principal = "*",
         Action = [
           "s3:GetObject",
           "s3:ListBucket"
@@ -15,11 +15,17 @@ resource "aws_s3_bucket_policy" "images_bucket_policy" {
           "${var.images_bucket_arn}",
           "${var.images_bucket_arn}/*"
         ]
+        Condition = {
+          StringLike = {
+            "aws:Referer" : [
+              "https://${var.cloudfront_domain_name}/*"
+            ]
+          }
+        }
       }
     ]
   })
 }
-
 
 
 resource "aws_iam_policy" "image_bucket_access" {
