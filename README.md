@@ -16,7 +16,7 @@ This project sets up a static website hosted on Amazon S3 with a CloudFront CDN 
 
 ## Architecture Diagram
 
-![Architecture Diagram](cdn.png)
+![Architecture Diagram](cdn.PNG)
 
 ## Setup Instructions
 
