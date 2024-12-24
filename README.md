@@ -13,6 +13,11 @@ This project sets up a static website hosted on Amazon S3 with a CloudFront CDN 
 - `cloudfront/distribution.tf`: CloudFront distribution resource definition.
 - `cloudfront/origin_access_identity.tf`: CloudFront origin access identity for secure S3 access.
 
+
+## Architecture Diagram
+
+![Architecture Diagram](cdn.png)
+
 ## Setup Instructions
 
 1. **Install Terraform**: Ensure you have Terraform installed on your machine. You can download it from the [Terraform website](https://www.terraform.io/downloads.html).

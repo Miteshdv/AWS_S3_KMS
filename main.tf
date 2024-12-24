@@ -40,11 +40,13 @@ module "cloudfront" {
 }
 
 module "iam" {
-  source                    = "./modules/iam"
-  bucket_name               = module.s3_website.bucket_id
-  bucket_arn                = module.s3_website.bucket_arn
-  images_bucket_name        = module.s3_images.bucket_id
-  images_bucket_arn         = module.s3_images.bucket_arn
-  origin_access_identity_id = module.s3_website.origin_access_identity_id
+  source                     = "./modules/iam"
+  bucket_name                = module.s3_website.bucket_id
+  bucket_arn                 = module.s3_website.bucket_arn
+  images_bucket_name         = module.s3_images.bucket_id
+  images_bucket_arn          = module.s3_images.bucket_arn
+  origin_access_identity_id  = module.s3_website.origin_access_identity_id
+  cloudfront_domain_name     = module.cloudfront.cloudfront_domain_name
+  website_bucket_domain_name = module.s3_website.bucket_regional_domain_name
 }
 
