@@ -14,13 +14,18 @@ variable "image_bucket_name" {
   type        = string
 }
 
-variable "aws_access_key_id" {
-  description = "AWS Access Key ID"
+
+variable "user_pool_id" {
+  description = "Cognito User Pool ID"
   type        = string
 }
 
-variable "aws_secret_access_key" {
-  description = "AWS Secret Access Key"
+variable "user_pool_web_client_id" {
+  description = "Cognito User Pool Web Client ID"
   type        = string
 }
 
+variable "identity_pool_id" {
+  description = "Cognito Identity Pool ID"
+  type        = string
+}

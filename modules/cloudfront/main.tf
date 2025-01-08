@@ -28,28 +28,6 @@ resource "aws_cloudfront_distribution" "cdn" {
 
     forwarded_values {
       query_string = false
-
-      cookies {
-        forward = "none"
-      }
-    }
-
-    min_ttl     = 0
-    default_ttl = 86400
-    max_ttl     = 31536000
-  }
-
-  ordered_cache_behavior {
-    path_pattern     = "images/*"
-    target_origin_id = var.image_bucket_id
-
-    viewer_protocol_policy = "redirect-to-https"
-    allowed_methods        = ["GET", "HEAD"]
-    cached_methods         = ["GET", "HEAD"]
-
-    forwarded_values {
-      query_string = false
-
       cookies {
         forward = "none"
       }
@@ -60,6 +38,8 @@ resource "aws_cloudfront_distribution" "cdn" {
     default_ttl = 86400
     max_ttl     = 31536000
   }
+
+
 
   restrictions {
     geo_restriction {
@@ -70,4 +50,8 @@ resource "aws_cloudfront_distribution" "cdn" {
   viewer_certificate {
     cloudfront_default_certificate = true
   }
+
+
 }
+
+
