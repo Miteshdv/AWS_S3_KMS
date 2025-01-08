@@ -2,9 +2,10 @@ data "template_file" "index_html" {
   template = file("${path.module}/index.html.tpl")
 
   vars = {
-    bucket_name           = var.image_bucket_name
-    aws_access_key_id     = var.aws_access_key_id
-    aws_secret_access_key = var.aws_secret_access_key
+    bucket_name             = var.image_bucket_name
+    user_pool_id            = var.user_pool_id
+    user_pool_web_client_id = var.user_pool_web_client_id
+    identity_pool_id        = var.identity_pool_id
   }
 }
 

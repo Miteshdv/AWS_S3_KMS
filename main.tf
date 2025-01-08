@@ -37,16 +37,23 @@ module "s3_images" {
   bucket_name = "s3-images-${random_string.suffix.result}"
   environment = "dev"
   kms_key_id  = aws_kms_key.s3_images_key.id
+
 }
 
 module "s3_website" {
-  source                = "./modules/s3_website"
-  bucket_name           = "s3-website-${random_string.suffix.result}"
-  environment           = "dev"
-  image_bucket_name     = module.s3_images.bucket_name
-  aws_access_key_id     = var.aws_access_key
-  aws_secret_access_key = var.aws_secret_key
+  source                  = "./modules/s3_website"
+  bucket_name             = "s3-website-${random_string.suffix.result}"
+  environment             = "dev"
+  image_bucket_name       = module.s3_images.bucket_name
+  user_pool_id            = module.cognito.user_pool_id
+  user_pool_web_client_id = module.cognito.user_pool_client_id
+  identity_pool_id        = module.cognito.identity_pool_id
 
+}
+module "cognito" {
+  source            = "./modules/cognito"
+  region            = "us-west-2"
+  image_bucket_name = module.s3_images.bucket_name
 }
 
 module "cloudfront" {
@@ -56,6 +63,12 @@ module "cloudfront" {
   origin_access_identity_path = module.s3_website.origin_access_identity_path
   website_bucket_id           = module.s3_website.bucket_id
   image_bucket_id             = module.s3_images.bucket_id
+  cognito_identity_pool_id    = module.cognito.identity_pool_id
+  authenticated_role_arn      = module.cognito.authenticated_role_arn
+  unauthenticated_role_arn    = module.cognito.unauthenticated_role_arn
+  cognito_user_pool_id        = module.cognito.user_pool_id
+  cognito_region              = module.cognito.region
+  app_client_id               = module.cognito.user_pool_client_id
 }
 
 module "iam" {
@@ -67,5 +80,6 @@ module "iam" {
   origin_access_identity_id  = module.s3_website.origin_access_identity_id
   cloudfront_domain_name     = module.cloudfront.cloudfront_domain_name
   website_bucket_domain_name = module.s3_website.bucket_regional_domain_name
+  identity_pool_id           = module.cognito.identity_pool_id
 }
 

@@ -33,3 +33,8 @@ variable "website_bucket_domain_name" {
   type        = string
 }
 
+variable "identity_pool_id" {
+  description = "Cognito Identity Pool ID"
+  type        = string
+}
+

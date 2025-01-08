@@ -1,6 +1,30 @@
 .terraform
 terraform.tfvars
+# Ignore package directory
+/modules/cloudfront/package/
 
+
+
+# Python specific ignores
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# pipenv
+Pipfile.lock
+
+# Ignore other temporary files
+*.tmp
+*.log
+*.bak
+*.swp
 
 
 
